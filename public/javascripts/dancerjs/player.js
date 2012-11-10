@@ -1,4 +1,6 @@
+correctDirection;
 
+function(
 $(document).ready(function() {
   $up = $('#up').hide();
   $upleft = $('#upleft').hide();
@@ -16,12 +18,13 @@ $(document).ready(function() {
   var displayArrow = function(arrows, currentArrow){
     var start = new Date().getTime();
     var step = function(){
-      if(new Date().getTime() - start < 60000){
+      if(new Date().getTime() - start < 90000){
         if(currentArrow !== undefined){
           currentArrow.hide();
         }
         currentArrow = arrows[Math.round(Math.random() * 7)];
         currentArrow.show();
+        correctDirection = currentArrow.attr('id');
         setTimeout(step, 1000);
       }
     };
