@@ -19,7 +19,6 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-	app.use(express.cookieParser('bunchofderp'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -39,12 +38,15 @@ server.listen(app.get('port'), function(){
 	console.log("Express server listening on port " + app.get('port'));
 });
 
+var scores = {};
 io.sockets.on('connection', function (socket) {
 	/* Debug */
 	socket.on('debug_data', function(data) {
 		console.dir(data);
 	});
 
+	socket.on('clientsconnect', function(data) {
+	});
 
 	/* Talk to Phone */
 	socket.on('motion', function (data) {
