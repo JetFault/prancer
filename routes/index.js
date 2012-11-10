@@ -3,6 +3,10 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'PrancerJS' });
+exports.phone_index = function(req, res) {
+  res.render('phone', { title: 'PrancerJS' });
+};
+
+exports.server_index = function(req, res) {
+	res.render('server', { title: 'PrancerJS' });
 };

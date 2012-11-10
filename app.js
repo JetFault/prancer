@@ -29,7 +29,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', routes.server_index);
+app.get('/player', routes.server_index);
 app.get('/users', user.list);
 
 
