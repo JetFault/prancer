@@ -1,4 +1,5 @@
-prancer
-=======
+# Prancer
 
-Prance like you've never pranced before, with your phone!
+Prance like you own it, shake those hands!
+
+Uses your phone's gyroscope to play DDR!
