@@ -19,6 +19,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
+	app.use(express.cookieParser('bunchofderp'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -29,7 +30,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.server_index);
+app.get('/', routes.studio_index);
 app.get('/player', routes.server_index);
 app.get('/users', user.list);
 
@@ -39,20 +40,36 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function (socket) {
-	//socket.emit('news', { hello: 'world' });
+	/* Debug */
+	socket.on('debug_data', function(data) {
+		console.dir(data);
+	});
+
+
+	/* Talk to Phone */
 	socket.on('motion', function (data) {
 		//var pretty = "MOTION x: " + data.x + "\t\ty: " + data.y + "\t\tz: " + data.z;
 		var pretty = data;
 		console.log(pretty);
 	});
-	socket.on('debug_data', function(data) {
-		console.dir(data);
-	});
+
 	socket.on('direction', function(data) {
 		console.dir(data);
 	});
+	
 	socket.on('orientation', function(data) {
 //		var pretty = "ORIENTATION alpha: " + data.alpha + "\t\tbeta: " + data.beta + "\t\tgamma: " + data.gamma;
 	//	console.log(pretty);
 	});
+	/* Talk to Phone End */
+
+
+	/* Talk to Studio*/
+	socket.on('point_gain', function(data) {
+		var user = data.user;
+	});
+	/* Talk to Studio End */
+
+
+
 });
