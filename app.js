@@ -18,7 +18,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
-  app.use(express.logger('dev'));
+  //app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -30,9 +30,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.studio_index);
-app.get('/player', routes.server_index);
-app.get('/users', user.list);
-app.post('/give_points', routes.getUser, routes.addPoints);
+app.get('/player', routes.phone_index);
 
 
 server.listen(app.get('port'), function(){
@@ -46,8 +44,8 @@ io.sockets.on('connection', function (socket) {
 		console.dir(data);
 	});
 
-	socket.on('clientsconnect', function(name) {
-    scores['socket'] = {"name": name, "score": 0};
+	socket.on('clientsconnect', function() {
+    scores['socket'] = {"score": 0};
 	});
 
 	/* Talk to Phone */
@@ -57,14 +55,24 @@ io.sockets.on('connection', function (socket) {
 //		console.log(pretty);
 //	});
 
-	socket.on('direction', function(data) {
-	  //console.dir(data);
+	socket.on('direction', function(direction) {
+    //console.dir(data);
     
 		// Ask music player if we are right!
-		socket.emit('check_hit', direction, function(points) {
+		socket.emit('check_hit', direction);
+    /*
       scores[socket].score = scores[socket].score + points;
-		});
+
+      console.log(points);
+		});*/
 	});
+
+  socket.on('sent_score', function(points) {
+    console.log("derp");
+      scores[socket].score = scores[socket].score + points;
+
+      console.log(points);
+  });
 	
 //	socket.on('orientation', function(data) {
 //		var pretty = "ORIENTATION alpha: " + data.alpha + "\t\tbeta: " + data.beta + "\t\tgamma: " + data.gamma;
