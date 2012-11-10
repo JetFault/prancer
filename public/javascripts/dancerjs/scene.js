@@ -3,10 +3,6 @@
   var renderer, particle;
   var mouseX = 0, mouseY = 0;
 
-  var stats = new Stats();
-  stats.domElement.id = 'stats';
-  document.getElementById('info').insertBefore( stats.domElement, document.getElementById('togglefft') );
-
   var windowHalfX = window.innerWidth / 2;
   var windowHalfY = window.innerHeight / 2;
   
@@ -53,7 +49,6 @@
   function animate() {
     requestAnimationFrame( animate );
     render();
-    stats.update();
   }
 
   var t = 0;

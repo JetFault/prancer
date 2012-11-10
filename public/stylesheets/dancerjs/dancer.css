@@ -111,3 +111,6 @@ body {
 #songinfo a {
     color: #ff0077;
 }
+
+.header {width:100%;}
+.arrows {width:100%; margin:0 auto;}

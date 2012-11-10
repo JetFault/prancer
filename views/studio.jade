@@ -1,6 +1,55 @@
-extends layout
+!!! 5
+html
+  head
+    title= title
+    link(rel="stylesheet", href='/stylesheets/dancerjs/dancer.css')
+    link(rel="stylesheet", href='/stylesheets/studio.css')
+  body
+    #info
+    h1 PrancerJS
+    canvas#fft(height="50", width="256")
+    img#up.arrow(src="/images/up.png")
+    img#upleft.arrow(src="/images/up-left.png")
+    img#left.arrow(src="/images/left.png")
+    img#downleft.arrow(src="/images/down-left.png")
+    img#down.arrow(src="/images/down.png")
+    img#downright.arrow(src="/images/down-right.png")
+    img#right.arrow(src="/images/right.png")
+    img#upright.arrow(src="/images/up-right.png")
 
-block content
-  h1 PrancerJS
+    #loading>Loading . . .
+    
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js")
+    script(src='/javascripts/studio.js')
 
-  script(src='/javascripts/studio.js)
+    <!-- Dancer.js -->
+    script(src="/javascripts/dancerjs/lib/Three.js")
+    script(src="/javascripts/dancerjs/lib/Stats.js")
+    script(src="/javascripts/dancerjs/lib/Detector.js")
+    script(src="/javascripts/dancerjs/dancer.min.js")
+    script(src="/javascripts/dancerjs/src/support.js")
+    script(src="/javascripts/dancerjs/src/kick.js")
+    script(src="/javascripts/dancerjs/src/adapterWebkit.js")
+    script(src="/javascripts/dancerjs/src/adapterMoz.js")
+    script(src="/javascripts/dancerjs/src/adapterFlash.js")
+    script(src="/javascripts/dancerjs/lib/fft.js")
+    script(src="/javascripts/dancerjs/lib/flash_detect.js")
+    script(src="/javascripts/dancerjs/plugins/dancer.fft.js")
+
+    script(src="/javascripts/dancerjs/scene.js")
+    script(src="/javascripts/dancerjs/player.js")
+
+    script
+      (function () {
+        var fft = document.getElementById( 'fft' ),
+        toggle = document.getElementById( 'togglefft' );
+        toggle.addEventListener( 'click', function ( e ) {
+          e.preventDefault();
+          fft.style.display = fft.style.display == 'block' ? 'none' : 'block';
+        }, true );
+
+        // Due to requiring loading message to float above the rest (absolute)
+        // But still wanting it centered;
+        var loading = document.getElementById('loading');
+        loading.style.marginLeft = (( window.outerWidth - 500 ) / 2) + 'px';
+      })();
