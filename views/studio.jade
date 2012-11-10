@@ -1,0 +1,55 @@
+doctype 5
+html(lang="en")
+  head
+    title
+  body
+    #info
+      h1 PrancerJS
+      a (#togglefft href="#") toggle FFT spectrum
+      <canvas (#fft" height="50" width="256"></canvas>
+      img (#up, src="./images/up.png")
+      img (#upleft", src="./images/up-left.png")
+      img (#left", src="./images/left.png")
+      img (#downleft", src="./images/down-left.png")
+      img (#down", src="./images/down.png")
+      img (#downright", src="./images/down-right.png")
+      img (#right", src="./images/right.png")
+      img (#upright", src="./images/up-right.png")
+
+    #loading>Loading . . .
+    
+    script src="../lib/Three.js"
+    script src="../lib/Stats.js"
+    script src="../lib/Detector.js"
+
+    <!-- Dancer.js -->
+    script src="../../src/dancer.js"
+    script src="../../src/support.js"
+    script src="../../src/kick.js"
+    script src="../../src/adapterWebkit.js"
+    script src="../../src/adapterMoz.js"
+    script src="../../src/adapterFlash.js"
+    script src="../../lib/fft.js"
+    script src="../../lib/flash_detect.js"
+    script src="../../plugins/dancer.fft.js"
+
+    <!-- Demo stuff -->
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
+    script src="js/scene.js"
+    script src="js/player.js"
+    script>
+      (function () {
+        var fft = document.getElementById( 'fft' ),
+        toggle = document.getElementById( 'togglefft' );
+        toggle.addEventListener( 'click', function ( e ) {
+          e.preventDefault();
+          fft.style.display = fft.style.display == 'block' ? 'none' : 'block';
+        }, true );
+
+        // Due to requiring loading message to float above the rest (absolute)
+        // But still wanting it centered;
+        var loading = document.getElementById('loading');
+        loading.style.marginLeft = (( window.outerWidth - 500 ) / 2) + 'px';
+      })();
+    </script>
+
