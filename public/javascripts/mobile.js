@@ -11,11 +11,6 @@ var isEmpty = function(obj) {
 var url = "http://" + window.location.host;
 var socket = io.connect(url);
 
-socket.on('news', function (data) {
-  console.log(data);
-  socket.emit('my other event', { my: 'data' });
-});
-
 var current_read = 0;
 var interval_threshold = 200;
 var avg_acc = {x:0, y:0, z:0};
@@ -44,8 +39,6 @@ window.addEventListener('devicemotion', function(event) {
   var interval = event.interval * 1000;
 
   current_read = current_read + interval;
-
-  //socket.emit('debug_data', {"curr_read": current_read, "interval": interval});
 
   // Only read every threshold milliseconds
   if(current_read >= interval_threshold) {

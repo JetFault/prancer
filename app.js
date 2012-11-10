@@ -20,6 +20,7 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.logger('dev'));
 	app.use(express.cookieParser('bunchofderp'));
+	app.use(express.cookieSession());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -33,6 +34,7 @@ app.configure('development', function(){
 app.get('/', routes.studio_index);
 app.get('/player', routes.server_index);
 app.get('/users', user.list);
+app.post('/give_points', routes.getUser, routes.addPoints);
 
 
 server.listen(app.get('port'), function(){
@@ -55,6 +57,13 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('direction', function(data) {
 		console.dir(data);
+		// Ask music player if we are right!
+		socket.emit('check_hit', direction, function(points) {
+			if(!points['socket'].points) {
+				points['socket'].points = 0;
+			}
+			points['socket'].points += points;
+		});
 	});
 	
 	socket.on('orientation', function(data) {
