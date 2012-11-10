@@ -46,39 +46,38 @@ io.sockets.on('connection', function (socket) {
 		console.dir(data);
 	});
 
-	socket.on('clientsconnect', function(data) {
+	socket.on('clientsconnect', function(name) {
+    scores['socket'] = {"name": name, "score": 0};
 	});
 
 	/* Talk to Phone */
-	socket.on('motion', function (data) {
+//	socket.on('motion', function (data) {
 		//var pretty = "MOTION x: " + data.x + "\t\ty: " + data.y + "\t\tz: " + data.z;
-		var pretty = data;
-		console.log(pretty);
-	});
+	//	var pretty = data;
+//		console.log(pretty);
+//	});
 
 	socket.on('direction', function(data) {
-		console.dir(data);
+	  //console.dir(data);
+    
 		// Ask music player if we are right!
 		socket.emit('check_hit', direction, function(points) {
-			if(!points['socket'].points) {
-				points['socket'].points = 0;
-			}
-			points['socket'].points += points;
+      scores[socket].score = scores[socket].score + points;
 		});
 	});
 	
-	socket.on('orientation', function(data) {
+//	socket.on('orientation', function(data) {
 //		var pretty = "ORIENTATION alpha: " + data.alpha + "\t\tbeta: " + data.beta + "\t\tgamma: " + data.gamma;
 	//	console.log(pretty);
-	});
+//	});
 	/* Talk to Phone End */
 
 
 	/* Talk to Studio*/
-	socket.on('point_gain', function(data) {
+/*	socket.on('point_gain', function(data) {
 		var user = data.user;
 	});
-	/* Talk to Studio End */
+*/	/* Talk to Studio End */
 
 
 

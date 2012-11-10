@@ -9,8 +9,8 @@ $(document).ready(function (){
 
   socket.on('connect', function(){
     socket.emit('clientsconnect', name);
-    socket.on('ready', function () {
+/*    socket.on('ready', function () {
       console.log('Connected !');
-    });
+    }); */
   });
 });

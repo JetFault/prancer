@@ -1,6 +1,5 @@
-correctDirection;
+var correctDirection;
 
-function(
 $(document).ready(function() {
   $up = $('#up').hide();
   $upleft = $('#upleft').hide();
